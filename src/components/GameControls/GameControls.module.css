@@ -1,0 +1,99 @@
+.controls {
+  margin-top: var(--spacing-xl);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.startButton,
+.restartButton {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  border: none;
+  color: var(--color-text-dark);
+  font-size: 18px;
+  font-weight: var(--font-weight-black);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  padding: var(--spacing-lg) var(--spacing-3xl);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 255, 136, 0.3);
+  min-width: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+.startButton::before,
+.restartButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.startButton:hover:not(:disabled),
+.restartButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, #00ff88, #00bb66);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 255, 136, 0.4);
+}
+
+.startButton:hover:not(:disabled)::before,
+.restartButton:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.startButton:active:not(:disabled),
+.restartButton:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 255, 136, 0.3);
+}
+
+.startButton:disabled,
+.restartButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  background: #666;
+  box-shadow: none;
+}
+
+.restartButton {
+  background: linear-gradient(135deg, var(--color-danger), var(--color-danger-dark));
+  box-shadow: 0 4px 12px rgba(255, 51, 51, 0.3);
+  color: var(--color-text-primary);
+}
+
+.restartButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, #ff4444, #cc0000);
+  box-shadow: 0 6px 20px rgba(255, 51, 51, 0.4);
+}
+
+@media (min-width: 480px) {
+  .startButton,
+  .restartButton {
+    font-size: 20px;
+    padding: var(--spacing-lg) 40px;
+    min-width: 220px;
+  }
+}
+
+@media (min-width: 768px) {
+  .controls {
+    margin-top: var(--spacing-2xl);
+  }
+  
+  .startButton,
+  .restartButton {
+    font-size: 22px;
+    padding: var(--spacing-xl) 50px;
+    min-width: 250px;
+    border-radius: 15px;
+  }
+} 

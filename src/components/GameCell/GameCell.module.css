@@ -1,0 +1,301 @@
+.cell {
+  width: 75px;
+  height: 75px;
+  border: none;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  position: relative;
+  animation: cardEntrance 0.4s ease-out forwards;
+  opacity: 0;
+  perspective: 1000px;
+  padding: 0;
+}
+
+.cellInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s ease-in-out;
+  transform-style: preserve-3d;
+  display: grid;
+  border-radius: var(--radius-lg);
+}
+
+.cellInner.flipped {
+  transform: rotateY(-180deg);
+}
+
+.cellFront,
+.cellBack {
+  grid-area: 1 / 1;
+  backface-visibility: hidden;
+  perspective: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: var(--font-weight-bold);
+}
+
+.cellFront {
+  background: linear-gradient(135deg, var(--color-secondary-light), var(--color-secondary));
+  border: var(--border-width-normal) solid var(--color-secondary);
+  box-shadow: var(--shadow-md);
+  transform: rotateY(0deg);
+}
+
+.cellBack {
+  transform: rotateY(180deg);
+  border: var(--border-width-thick) solid var(--color-secondary);
+  box-shadow: var(--shadow-lg);
+  background: linear-gradient(135deg, var(--color-secondary-light), var(--color-secondary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: var(--font-weight-bold);
+}
+
+/* Win state - GREEN CARD as per requirements */
+.cellRevealed.cellWin .cellBack {
+  background: linear-gradient(135deg, #00ff88, #00cc66) !important;
+  border-color: #00ff88 !important;
+  color: #ffffff !important;
+  font-weight: var(--font-weight-black) !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Lose state - RED CARD as per requirements */
+.cellRevealed.cellMine .cellBack {
+  background: linear-gradient(135deg, #ff3333, #cc0000) !important;
+  border-color: #ff3333 !important;
+  color: #ffffff !important;
+  font-weight: var(--font-weight-black) !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+
+.cell::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  border-radius: var(--radius-lg);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.cell:hover:not(:disabled) {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(255, 136, 0, 0.4), 0 0 20px rgba(255, 136, 0, 0.2);
+}
+
+.cell:hover:not(:disabled)::before {
+  opacity: 1;
+}
+
+.cell:active:not(:disabled) {
+  transform: translateY(-1px) scale(0.98);
+  transition: all 0.08s ease;
+}
+
+@keyframes cardEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) rotateX(-90deg);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-5px) rotateX(10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
+}
+
+.cellHidden .cellFront {
+  animation: cardPulse 1.5s ease-in-out infinite;
+}
+
+.cellHidden:hover:not(:disabled) .cellFront {
+  background: linear-gradient(135deg, var(--color-secondary-bright), var(--color-secondary-hover));
+  animation: cardHover 0.2s ease-out forwards;
+}
+
+.cellWin .cellBack {
+  background: linear-gradient(135deg, var(--color-secondary-light), var(--color-secondary));
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  animation: winCelebration 0.5s ease-out 0.4s forwards;
+  position: relative;
+}
+
+.cellWin .cellBack::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(0, 255, 136, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  animation: winGlow 0.6s ease-out 0.5s forwards;
+}
+
+.cellMine .cellBack {
+  background: linear-gradient(135deg, var(--color-danger), var(--color-danger-dark));
+  color: var(--color-text-primary);
+  border-color: var(--color-danger-border);
+  animation: mineExplosion 0.4s ease-out 0.4s forwards;
+  position: relative;
+}
+
+.cellMine .cellBack::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(circle, rgba(255, 51, 51, 0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  animation: explosionShockwave 0.5s ease-out 0.4s forwards;
+}
+
+.cellRevealed {
+  cursor: default;
+  pointer-events: none;
+}
+
+@keyframes cardPulse {
+  0%, 100% { 
+    box-shadow: var(--shadow-md); 
+  }
+  50% { 
+    box-shadow: 0 6px 15px rgba(255, 136, 0, 0.3), 0 0 15px rgba(255, 136, 0, 0.1); 
+  }
+}
+
+@keyframes cardHover {
+  0% { 
+    background: linear-gradient(135deg, var(--color-secondary-light), var(--color-secondary)); 
+  }
+  100% { 
+    background: linear-gradient(135deg, var(--color-secondary-bright), var(--color-secondary-hover)); 
+  }
+}
+
+@keyframes winCelebration {
+  0% {
+    transform: rotateY(180deg) scale(1) rotateZ(0deg);
+    box-shadow: var(--shadow-md);
+  }
+  25% {
+    transform: rotateY(180deg) scale(1.1) rotateZ(-5deg);
+    box-shadow: 0 8px 25px rgba(0, 255, 136, 0.5);
+  }
+  50% {
+    transform: rotateY(180deg) scale(1.05) rotateZ(3deg);
+  }
+  75% {
+    transform: rotateY(180deg) scale(1.08) rotateZ(-2deg);
+  }
+  100% {
+    transform: rotateY(180deg) scale(1) rotateZ(0deg);
+    box-shadow: 0 6px 20px rgba(0, 255, 136, 0.4);
+  }
+}
+
+@keyframes winGlow {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes mineExplosion {
+  0% {
+    transform: rotateY(180deg) scale(1);
+    box-shadow: var(--shadow-md);
+  }
+  20% {
+    transform: rotateY(180deg) scale(1.2) rotate(-2deg);
+    box-shadow: 0 10px 30px rgba(255, 51, 51, 0.6);
+  }
+  40% {
+    transform: rotateY(180deg) scale(0.9) rotate(1deg);
+  }
+  60% {
+    transform: rotateY(180deg) scale(1.1) rotate(-1deg);
+  }
+  80% {
+    transform: rotateY(180deg) scale(0.95) rotate(0.5deg);
+  }
+  100% {
+    transform: rotateY(180deg) scale(1) rotate(0deg);
+    box-shadow: 0 8px 25px rgba(255, 51, 51, 0.5);
+  }
+}
+
+@keyframes explosionShockwave {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
+
+.cell:disabled {
+  cursor: default;
+}
+
+@media (min-width: 480px) {
+  .cell {
+    width: 85px;
+    height: 85px;
+  }
+  
+  .cellFront,
+  .cellBack {
+    font-size: 32px;
+  }
+}
+
+@media (min-width: 768px) {
+  .cell {
+    width: 95px;
+    height: 95px;
+  }
+  
+  .cellFront,
+  .cellBack {
+    font-size: 36px;
+  }
+} 

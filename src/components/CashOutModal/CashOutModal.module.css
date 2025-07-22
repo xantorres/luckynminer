@@ -1,0 +1,367 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+  animation: overlayFadeIn 0.3s ease-out;
+}
+
+.modal {
+  background: var(--color-surface);
+  border: var(--border-width-thick) solid var(--color-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-3xl);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  position: relative;
+  animation: modalSlideIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Confirm Stage */
+.confirmStage {
+  animation: stageAppear 0.3s ease-out;
+}
+
+.icon {
+  font-size: 48px;
+  margin-bottom: var(--spacing-lg);
+  animation: iconFloat 2s ease-in-out infinite;
+}
+
+.title {
+  color: var(--color-text-primary);
+  font-size: 24px;
+  font-weight: var(--font-weight-black);
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+.description {
+  color: var(--color-text-secondary);
+  font-size: 16px;
+  margin: 0 0 var(--spacing-lg) 0;
+}
+
+.amount {
+  background: var(--color-primary);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  margin: 0 0 var(--spacing-xl) 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  animation: amountPulse 1.5s ease-in-out infinite;
+}
+
+.currency,
+.value {
+  color: var(--color-text-dark);
+  font-size: 32px;
+  font-weight: var(--font-weight-black);
+}
+
+.coins {
+  color: var(--color-text-dark);
+  font-size: 16px;
+  font-weight: var(--font-weight-bold);
+}
+
+.actions {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.cancelButton,
+.confirmButton {
+  flex: 1;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  border: none;
+  font-size: 16px;
+}
+
+.cancelButton {
+  background: var(--color-text-muted);
+  color: var(--color-text-primary);
+}
+
+.cancelButton:hover {
+  background: var(--color-border);
+  transform: translateY(-2px);
+}
+
+.confirmButton {
+  background: var(--color-primary);
+  color: var(--color-text-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.confirmButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.confirmButton:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 255, 136, 0.4);
+}
+
+.confirmButton:hover::before {
+  left: 100%;
+}
+
+/* Celebrating Stage */
+.celebratingStage {
+  animation: stageAppear 0.5s ease-out;
+}
+
+.celebration {
+  position: relative;
+  margin-bottom: var(--spacing-xl);
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fireworks,
+.trophy,
+.money {
+  position: absolute;
+  font-size: 36px;
+}
+
+.fireworks {
+  animation: fireworksExplode 0.8s ease-out infinite;
+}
+
+.trophy {
+  animation: trophyBounce 1s ease-out infinite;
+  z-index: 2;
+}
+
+.money {
+  animation: moneyFloat 1.2s ease-in-out infinite;
+}
+
+.successTitle {
+  color: var(--color-primary);
+  font-size: 28px;
+  font-weight: var(--font-weight-black);
+  margin: 0 0 var(--spacing-lg) 0;
+  animation: textGlow 1s ease-in-out infinite alternate;
+}
+
+.winAmount {
+  font-size: 48px;
+  font-weight: var(--font-weight-black);
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-md);
+  animation: amountCelebrate 1s ease-out infinite;
+}
+
+.winCurrency,
+.winValue {
+  text-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
+}
+
+.winText {
+  color: var(--color-text-secondary);
+  font-size: 18px;
+  font-weight: var(--font-weight-semibold);
+  margin: 0;
+}
+
+/* Complete Stage */
+.completeStage {
+  animation: stageAppear 0.3s ease-out;
+}
+
+.completedIcon {
+  font-size: 64px;
+  margin-bottom: var(--spacing-lg);
+  animation: checkmarkPop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.completeTitle {
+  color: var(--color-text-primary);
+  font-size: 24px;
+  font-weight: var(--font-weight-black);
+  margin: 0 0 var(--spacing-xl) 0;
+}
+
+.summary {
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.summaryItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.summaryItem:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.summaryValue {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.finalActions {
+  display: flex;
+  justify-content: center;
+}
+
+.newGameButton {
+  background: var(--color-primary);
+  color: var(--color-text-dark);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md) var(--spacing-3xl);
+  font-size: 18px;
+  font-weight: var(--font-weight-black);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.newGameButton:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 255, 136, 0.4);
+}
+
+/* Animations */
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes stageAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes amountPulse {
+  0%, 100% { 
+    box-shadow: 0 4px 12px rgba(0, 255, 136, 0.3);
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 8px 24px rgba(0, 255, 136, 0.5);
+    transform: scale(1.02);
+  }
+}
+
+@keyframes fireworksExplode {
+  0% { transform: scale(0.5) rotate(0deg); opacity: 1; }
+  50% { transform: scale(1.5) rotate(180deg); opacity: 0.8; }
+  100% { transform: scale(0.8) rotate(360deg); opacity: 1; }
+}
+
+@keyframes trophyBounce {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-15px) scale(1.1); }
+}
+
+@keyframes moneyFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-10px) rotate(5deg); }
+  66% { transform: translateY(-5px) rotate(-5deg); }
+}
+
+@keyframes textGlow {
+  from { text-shadow: 0 0 10px rgba(0, 255, 136, 0.5); }
+  to { text-shadow: 0 0 20px rgba(0, 255, 136, 0.8); }
+}
+
+@keyframes amountCelebrate {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.1) rotate(2deg); }
+  75% { transform: scale(1.05) rotate(-1deg); }
+}
+
+@keyframes checkmarkPop {
+  0% { transform: scale(0) rotate(-45deg); }
+  60% { transform: scale(1.2) rotate(10deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+@media (max-width: 480px) {
+  .modal {
+    padding: var(--spacing-xl);
+    margin: var(--spacing-lg);
+  }
+  
+  .title,
+  .completeTitle {
+    font-size: 20px;
+  }
+  
+  .amount {
+    padding: var(--spacing-md);
+  }
+  
+  .currency,
+  .value {
+    font-size: 24px;
+  }
+  
+  .winAmount {
+    font-size: 36px;
+  }
+} 

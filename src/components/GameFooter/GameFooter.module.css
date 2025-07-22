@@ -1,0 +1,153 @@
+.footer {
+  margin-top: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+  animation: footerSlideUp 0.8s ease-out 0.5s forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes footerSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.coinTiers {
+  display: flex;
+  gap: var(--spacing-xs);
+  background: var(--color-surface);
+  border: var(--border-width-thick) solid var(--color-primary);
+  border-radius: 25px;
+  padding: var(--spacing-sm);
+}
+
+.coinTier {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  font-weight: var(--font-weight-semibold);
+}
+
+.coinTier.achieved {
+  background: var(--color-primary);
+  color: var(--color-text-dark);
+  animation: tierAchieved 0.6s ease-out forwards;
+  position: relative;
+}
+
+.coinTier.achieved::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(0, 255, 136, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  animation: tierGlow 0.8s ease-out forwards;
+}
+
+@keyframes tierAchieved {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes tierGlow {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
+
+.currencySymbol,
+.coinIcon {
+  font-size: 12px;
+}
+
+.amount,
+.coins {
+  font-weight: var(--font-weight-black);
+}
+
+.nextPrize {
+  background: var(--color-primary);
+  border-radius: 15px;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  text-align: center;
+  min-width: 80px;
+}
+
+.nextPrizeLabel {
+  font-size: 10px;
+  font-weight: var(--font-weight-extra-bold);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-text-dark);
+  margin-bottom: var(--spacing-xs);
+}
+
+.nextPrizeValue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+}
+
+.prizeDisplay {
+  font-size: 14px;
+  font-weight: var(--font-weight-black);
+  color: var(--color-text-dark);
+  transition: var(--transition-fast);
+  animation: prizeUpdate 0.5s ease-out;
+}
+
+@keyframes prizeUpdate {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media (min-width: 480px) {
+  .coinTiers {
+    gap: var(--spacing-sm);
+  }
+  
+  .coinTier {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 13px;
+  }
+} 

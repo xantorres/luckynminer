@@ -1,0 +1,182 @@
+.header {
+  margin-bottom: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.balancePill {
+  display: flex;
+  background: var(--color-surface);
+  border: var(--border-width-thick) solid var(--color-primary);
+  border-radius: 25px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 320px;
+  animation: pillEntrance 0.8s ease-out forwards;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 255, 136, 0.2);
+}
+
+@keyframes pillEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.balanceSection {
+  flex: 1;
+  background: var(--color-primary);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  text-align: center;
+}
+
+.maxPrizeSection {
+  flex: 1;
+  background: #ffffff;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  text-align: center;
+}
+
+.sectionLabel {
+  font-size: 11px;
+  font-weight: var(--font-weight-extra-bold);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: var(--spacing-xs);
+}
+
+.balanceSection .sectionLabel {
+  color: var(--color-text-dark);
+}
+
+.maxPrizeSection .sectionLabel {
+  color: var(--color-text-dark);
+}
+
+.balanceValues,
+.maxPrizeValues {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+}
+
+.balanceSection .currencySymbol,
+.balanceSection .coinIcon,
+.balanceSection .value {
+  color: var(--color-text-dark);
+}
+
+.maxPrizeSection .currencySymbol,
+.maxPrizeSection .coinIcon,
+.maxPrizeSection .value {
+  color: var(--color-text-dark);
+}
+
+.currencySymbol,
+.coinIcon {
+  font-size: 14px;
+  font-weight: var(--font-weight-bold);
+}
+
+.value {
+  font-weight: var(--font-weight-black);
+  font-size: 16px;
+}
+
+.cashOutButton {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: var(--color-text-dark);
+  border: none;
+  border-radius: 15px;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: 14px;
+  font-weight: var(--font-weight-extra-bold);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  min-width: 100px;
+  position: relative;
+  overflow: hidden;
+  animation: cashOutPulse 2s ease-in-out infinite;
+}
+
+.cashOutButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.cashOutButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, #00ff88, #00bb66);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 255, 136, 0.4);
+}
+
+.cashOutButton:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+@keyframes cashOutPulse {
+  0%, 100% {
+    box-shadow: 0 4px 12px rgba(0, 255, 136, 0.3);
+  }
+  50% {
+    box-shadow: 0 6px 18px rgba(0, 255, 136, 0.5);
+  }
+}
+
+.cashOutButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (min-width: 480px) {
+  .balancePill {
+    max-width: 400px;
+  }
+  
+  .cashOutButton {
+    padding: 10px 20px;
+    font-size: 15px;
+    min-width: 120px;
+  }
+  
+  .value {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 768px) {
+  .balancePill {
+    max-width: 450px;
+  }
+  
+  .sectionLabel {
+    font-size: 12px;
+  }
+  
+  .value {
+    font-size: 20px;
+  }
+  
+  .cashOutButton {
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: 16px;
+    min-width: 140px;
+  }
+} 
